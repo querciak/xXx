@@ -3,9 +3,8 @@
 #imports:
 from Sensing import Sensing
 from pybricks.parameters import Port, Color
-from Actions import Actions
+import Actions
 
-action = Actions()
 sensing = Sensing()
 
 ''' STATES for challange1
@@ -24,13 +23,13 @@ STATES = ['init','reachstripe','turningleft','maze_followline',
 
 # parameters
 cycle_time = 10 # 10 ms
-sm_challange1_init_timer_threshold = 1000/cycle_time # 1sec
-mazeturn_counter_threshold = 2000/cycle_time # 2 sec -> time to turn 90 degrees
-searching_line_turn_threshold = 100/cycle_time
+sm_challange1_init_timer_threshold = 100/cycle_time # 1sec
+mazeturn_counter_threshold = 200/cycle_time # 2 sec -> time to turn 90 degrees
+searching_line_turn_threshold = 10/cycle_time
 
 # action parameters
-left_turning_speed = 45 # 45 deg/s
-longitudinal_speed = 500
+left_turning_speed = -90 # 45 deg/s
+longitudinal_speed = -150
 
 
 def isTimerPassed(counter, threshold):
@@ -76,6 +75,7 @@ def sm_challange1_main():
     global searching_line_turn_threshold
     global mazeturn_counter_threshold
 
+    print(sensing.get_color())
 
     if CURRENT_STATE == STATES[0]: # init
         #check valid transition
@@ -103,8 +103,9 @@ def sm_challange1_main():
 
     elif CURRENT_STATE == STATES[4]: # mazeturn
         # check turning timer
-        if isTimerPassed(mazeturn_timer,mazeturn_counter_threshold) == True:
+        if isTimerPassed(mazeturn_timer, mazeturn_counter_threshold) == True:
             transition_to = 3
+            mazeturn_timer = 0
 
     elif CURRENT_STATE == STATES[5]: # mazepressbutton
         pass
@@ -125,30 +126,30 @@ def sm_challange1_main():
 
     elif CURRENT_STATE == STATES[1]: # reachstripe
         # set speed value
-        action.straight_speed = longitudinal_speed
-        action.steering_speed = 0
+        Actions.get_actions().straight_speed = longitudinal_speed
+        Actions.get_actions().steering_speed = 0
 
     elif CURRENT_STATE == STATES[2]: # turningleft
         # increase timer
         searching_line_turn_threshold += 1
         # update speed values
-        action.steering_speed = left_turning_speed # 45 deg/s
-        action.straight_speed = 0
+        Actions.get_actions().steering_speed = left_turning_speed # 45 deg/s
+        Actions.get_actions().straight_speed = 0
 
     elif CURRENT_STATE == STATES[3]: # maze_followline
-        action.straight_speed = longitudinal_speed
-        action.steering_speed = 0
+        Actions.get_actions().straight_speed = longitudinal_speed
+        Actions.get_actions().steering_speed = 0
 
     elif CURRENT_STATE == STATES[4]: # mazeturn
         # increase timer
-        mazeturn_counter_threshold += 1
+        mazeturn_timer += 1
         # update speed values
-        action.straight_speed = 0
-        action.steering_speed = left_turning_speed # 45 deg/sec
+        Actions.get_actions().straight_speed = 0
+        Actions.get_actions().steering_speed = left_turning_speed # 45 deg/sec
 
     elif CURRENT_STATE == STATES[5]: # mazepressbutton
-        action.straight_speed = 0
-        action.steering_speed = 0
+        Actions.get_actions().straight_speed = 0
+        Actions.get_actions().steering_speed = 0
 
     elif CURRENT_STATE == STATES[6]: # mazeturnaround
         pass

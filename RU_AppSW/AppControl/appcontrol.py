@@ -20,6 +20,8 @@ def isThirdChallangeFinished():
 
 
 def appcontrol_main():
+    global PERFORMED_CHALLANGE
+    
     if PERFORMED_CHALLANGE[0]:
         # transition to challange 2
         if isFirstChallangeFinished() == True:
