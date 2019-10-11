@@ -1,5 +1,4 @@
 from collections import deque
-from statistics import mode
 
 from pybricks import ev3brick as brick
 from pybricks.ev3devices import ColorSensor
@@ -29,6 +28,6 @@ class Sensing():
     def get_color(self):
         i = 0
         self.__col_queue.append(self.color_sensor.color())
-        most_freq_col = mode(self.__col_queue)
+        most_freq_col = self.most_frequent(self.__col_queue)
         brick.display.text(str(most_freq_col))
         return most_freq_col
