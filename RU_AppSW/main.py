@@ -21,4 +21,4 @@ while True:
 
     # end of actions
     elapsed = begin - time()
-    wait(min(timestep_size - int(elapsed), 0))
+    wait(max(timestep_size - int(elapsed), 0))
