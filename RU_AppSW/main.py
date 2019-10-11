@@ -1,17 +1,16 @@
 #!/usr/bin/env pybricks-micropython
+from time import time
 
-from pybricks import ev3brick as brick
-from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
-                                 InfraredSensor, UltrasonicSensor, GyroSensor)
-from pybricks.parameters import (Port, Stop, Direction, Button, Color,
-                                 SoundFile, ImageFile, Align)
-from pybricks.tools import print, wait, StopWatch
-from pybricks.robotics import DriveBase
+from pybricks.tools import wait
 
-from Sensing import Sensing
-
-sens = Sensing()
+timestep_size = 10
 
 while True:
-    sens.get_color()
-    wait(1000)
+    begin = time()
+
+    # actions inside here
+
+
+    # end of actions
+    elapsed = begin - time()
+    wait(min(timestep_size - int(elapsed), 0))
