@@ -182,6 +182,8 @@ def sm_challenge1_main():
         searching_line_turn_timer = 0
         adaptline_maneuver_counter = 0
         out_from_emergency_counter = 0
+    # update state
+    CURRENT_STATE = emergency_evaulation[1]
 
 
 

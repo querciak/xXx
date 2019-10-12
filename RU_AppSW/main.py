@@ -22,9 +22,9 @@ while True:
     begin = watch.time() # total elapsed time in ms
 
     # actions inside here
-    # not tested -->
-    #if Music.get_music().isPlaying() != True:
-    #    threading.Thread(target=Music.get_music().playMusic())
+    # play next note if needed
+    # TODO uncomment following line for the competition
+    # Music.get_music().play_music()
         
     appcontrol.appcontrol_main()
     sm_challenge1.sm_challenge1_main()
