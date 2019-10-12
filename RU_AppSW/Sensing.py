@@ -61,3 +61,10 @@ class Sensing():
 
     def get_button(self):
         return self.infrared_sensor.buttons(1)
+
+
+sensing = Sensing()
+
+
+def get_sensing():
+    return sensing

@@ -1,8 +1,8 @@
 #!/usr/bin/env pybricks-micropython
 from pybricks.tools import wait, StopWatch
 import AppControl.appcontrol as appcontrol
-import AppControl.sm_challange1 as sm_challange1
-import threading
+import AppControl.sm_challange1 as sm_challenge1
+#import threading
 
 import Actions
 import Sensing
@@ -16,7 +16,7 @@ watch = StopWatch()
 
 # init components
 appcontrol.appcontrol_init()
-sm_challange1.sm_challange1_init()
+sm_challenge1.sm_challenge1_init()
 
 while True:
     begin = watch.time() # total elapsed time in ms
@@ -27,7 +27,7 @@ while True:
     #    threading.Thread(target=Music.get_music().playMusic())
         
     appcontrol.appcontrol_main()
-    sm_challange1.sm_challange1_main()
+    sm_challenge1.sm_challenge1_main()
 
     # actuate
 

@@ -8,6 +8,8 @@ class Actions:
         super().__init__()
         self.straight_speed = 0
         self.steering_speed = 0
+        self.suggested_longitudinal_speed = -120 # going forward
+        self.suggested_left_turn_speed = 90
         self._left_motor = Motor(Port.D)
         self._right_motor = Motor(Port.A)
         self._wheels = DriveBase(self._left_motor, self._right_motor, wheel_diameter=56, axle_track=114)
