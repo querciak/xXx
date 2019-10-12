@@ -21,6 +21,9 @@ class Actions:
     def actuate(self):
         self._wheels.drive(self.straight_speed,self.steering_speed)
 
+    def get_speed_of_motors(self):
+        return [self._left_motor.speed(),self._right_motor.speed()]
+
 
 action = Actions()
 

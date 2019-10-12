@@ -1,7 +1,7 @@
 from collections import deque
 
 from pybricks import ev3brick as brick
-from pybricks.ev3devices import ColorSensor
+from pybricks.ev3devices import ColorSensor, InfraredSensor
 from pybricks.parameters import Port, Color
 
 
@@ -36,6 +36,7 @@ class Sensing():
         self.__POSSIBLE_COLORS = (Color.BLACK, Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED, Color.WHITE, Color.BROWN)
         self.color_samples = 5
         self.color_sensor = ColorSensor(Port.S2)
+        self.infrared_sensor = InfraredSensor(Port.S4)
         #self.__col_queue = deque(maxlen=self.color_samples)
 
     @staticmethod
@@ -57,3 +58,6 @@ class Sensing():
         #brick.display.text(str(most_freq_col))
         #return most_freq_col
         return self.color_sensor.color()
+
+    def get_button(self):
+        return self.infrared_sensor.buttons(1)
