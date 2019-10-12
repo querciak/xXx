@@ -2,9 +2,11 @@
 from pybricks.tools import wait, StopWatch
 import AppControl.appcontrol as appcontrol
 import AppControl.sm_challange1 as sm_challange1
+import threading
 
 import Actions
 import Sensing
+import Music
 
 timestep_size = 10
 
@@ -20,7 +22,10 @@ while True:
     begin = watch.time() # total elapsed time in ms
 
     # actions inside here
-
+    # not tested -->
+    #if Music.get_music().isPlaying() != True:
+    #    threading.Thread(target=Music.get_music().playMusic())
+        
     appcontrol.appcontrol_main()
     sm_challange1.sm_challange1_main()
 

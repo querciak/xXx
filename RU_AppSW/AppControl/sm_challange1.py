@@ -27,9 +27,10 @@ STATES = ['init','reachstripe','turningleft','maze_followline',
 
 # parameters
 cycle_time = 10 # 10 ms
-sm_challange1_init_timer_threshold = 100/cycle_time # 1sec
+sm_challange1_init_timer_threshold = 100/cycle_time # 0.1sec
 mazeturn_counter_threshold = 2000/cycle_time # 2 sec -> time to turn 90 degrees
 searching_line_turn_threshold = 100/cycle_time
+back_to_automation_threshold = 200/cycle_time
 
 left_top = 128
 left_bottom = 2
@@ -93,6 +94,7 @@ def sm_challange1_main():
     global right_bottom
     global previous_state
     global out_from_emergency_counter
+    global back_to_automation_threshold
 
     # parse input data
     pressed_buttons = sensing.get_button()
@@ -113,6 +115,7 @@ def sm_challange1_main():
     elif CURRENT_STATE == STATES[2]: # turningleft
         if isTimerPassed(searching_line_turn_timer,searching_line_turn_threshold) == True:
             transition_to = 1
+            searching_line_turn_timer = 0
 
     elif CURRENT_STATE == STATES[3]: # maze_followline
         #first check for the yellow button
@@ -157,7 +160,7 @@ def sm_challange1_main():
 
     elif CURRENT_STATE == STATES[2]: # turningleft
         # increase timer
-        searching_line_turn_threshold += 1
+        searching_line_turn_timer += 1
         # update speed values
         Actions.get_actions().steering_speed = left_turning_speed # 45 deg/s
         Actions.get_actions().straight_speed = 0
@@ -182,6 +185,7 @@ def sm_challange1_main():
 
     elif CURRENT_STATE == STATES[7]: # mazewait_for_obstacletomove
         pass
+
     elif CURRENT_STATE == STATES[8]:
         # perform_maneuver
         Actions.get_actions().straight_speed = longitudinal_speed/10
@@ -195,7 +199,7 @@ def sm_challange1_main():
         adaptline_maneuver_counter = 0
         out_from_emergency_counter = 0
 
-        CURRENT_STATE = STATES[9]
+        CURRENT_STATE = STATES[9] # emergency solution -> remote control
         sum_buttons = 0
         for button in pressed_buttons:
             sum_buttons += button
@@ -206,11 +210,11 @@ def sm_challange1_main():
             Actions.get_actions().steering_speed = 0
         elif sum_buttons == left_top:
             # turn left
-            Actions.get_actions().straight_speed = 0
+            Actions.get_actions().straight_speed = int(longitudinal_speed/2)
             Actions.get_actions().steering_speed = left_turning_speed
         elif sum_buttons == right_top:
             # turn right
-            Actions.get_actions().straight_speed = 0
+            Actions.get_actions().straight_speed = int(longitudinal_speed/2)
             Actions.get_actions().steering_speed = -left_turning_speed
         elif sum_buttons == (left_bottom+right_bottom):
             # move backward
@@ -228,19 +232,8 @@ def sm_challange1_main():
         Actions.get_actions().straight_speed = 0
         Actions.get_actions().steering_speed = 0
         out_from_emergency_counter += 1
-        if out_from_emergency_counter > 20:
-            CURRENT_STATE = previous_state
-
-        '''
-        button = pressed_buttons[0]
-        if button == left_top:
-            Actions.get_actions().steering_speed = longitudinal_speed
-        elif button == left_bottom:
-            Actions.get_actions().steering_speed = -longitudinal_speed
-        elif button == right_top:
-            Actions.get_actions().straight_speed = longitudinal_speed
-        elif button == right_bottom:
-        '''
+        if out_from_emergency_counter > back_to_automation_threshold:
+            CURRENT_STATE = previous_state # back to state before corrigation
 
 
 
@@ -264,6 +257,5 @@ def sm_challange1_init():
     adaptline_maneuver_counter = 0
     out_from_emergency_counter = 0
     previous_state = STATES[0]
-
-    for i in range(1,180):
-        adaptline_manuever.append(left_turning_speed + 10)
+    
+    adaptline_manuever = [left_turning_speed]*100 + [-left_turning_speed]*100
