@@ -5,6 +5,7 @@ import Sensing
 from pybricks.parameters import Port, Color
 import Actions
 import EmergencySolution
+import line_following
 
 from pybricks.tools import wait
 
@@ -149,8 +150,9 @@ def sm_challenge1_main():
         Actions.get_actions().straight_speed = 0
 
     elif CURRENT_STATE == STATES[3]: # maze_followline
-        Actions.get_actions().straight_speed = Actions.get_actions().suggested_longitudinal_speed
-        Actions.get_actions().steering_speed = 0
+        # Actions.get_actions().straight_speed = Actions.get_actions().suggested_longitudinal_speed
+        # Actions.get_actions().steering_speed = 0
+        line_following.follow_the_line()
 
     elif CURRENT_STATE == STATES[4]: # mazeturn
         # increase timer

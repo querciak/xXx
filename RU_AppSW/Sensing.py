@@ -60,6 +60,9 @@ class Sensing():
         #return most_freq_col
         return self.color_sensor.color()
 
+    def get_reflection(self):
+        return self.color_sensor.reflection()
+
     def get_button(self):
         return self.infrared_sensor.buttons(1)
 
