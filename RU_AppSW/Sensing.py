@@ -1,7 +1,7 @@
 from collections import deque
 
 from pybricks import ev3brick as brick
-from pybricks.ev3devices import ColorSensor, InfraredSensor
+from pybricks.ev3devices import ColorSensor, InfraredSensor, TouchSensor
 from pybricks.parameters import Port, Color
 
 
@@ -35,6 +35,7 @@ class Sensing():
         super().__init__()
         self.__POSSIBLE_COLORS = (Color.BLACK, Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED, Color.WHITE, Color.BROWN)
         self.color_samples = 5
+        self.touch_sensor = TouchSensor(Port.S1)
         self.color_sensor = ColorSensor(Port.S2)
         self.infrared_sensor = InfraredSensor(Port.S4)
         #self.__col_queue = deque(maxlen=self.color_samples)
@@ -62,6 +63,11 @@ class Sensing():
     def get_button(self):
         return self.infrared_sensor.buttons(1)
 
+    def get_distance(self):
+        return self.infrared_sensor.distance()
+
+    def is_pressed(self):
+        return self.touch_sensor.pressed()
 
 sensing = Sensing()
 
