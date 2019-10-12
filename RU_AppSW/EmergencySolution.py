@@ -16,6 +16,7 @@ class EmergencySolution():
     def check_for_emergency_solution(self,current_state):
         #if button pressed, channels etc..
         pressed_buttons = Sensing.get_sensing().get_button()
+        print(pressed_buttons)
         if len(pressed_buttons) > 0:
             # enterred to emergency_state
             ret_val = True

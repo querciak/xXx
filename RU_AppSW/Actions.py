@@ -9,8 +9,8 @@ class Actions:
         self.straight_speed = 0
         self.steering_speed = 0
         self.arm_speed = 0
-        self.suggested_longitudinal_speed = -120 # going forward
-        self.suggested_left_turn_speed = 90
+        self.suggested_longitudinal_speed = -360 # going forward
+        self.suggested_left_turn_speed = 150
         self._left_motor = Motor(Port.D)
         self._right_motor = Motor(Port.A)
         self._arm_motor = Motor(Port.C)
