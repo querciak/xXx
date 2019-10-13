@@ -7,12 +7,8 @@ import AppControl.sm_challenge2 as sm_challenge2
 
 #import Actions
 import Sensing
-<<<<<<< HEAD
-#import Music
-=======
 import Music
 import line_following
->>>>>>> f7fe0d8723e5bfcff277506316c1187c083b12a7
 
 timestep_size = 10
 
