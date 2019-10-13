@@ -92,8 +92,12 @@ class line_following():
             #lowest priority
             elif average_of_last_points > full_white_reflection:
                 # check history whether it was 
-                longitudinal_velocity = suggested_long_vel/5
+                longitudinal_velocity = suggested_long_vel/3
                 angular_velocity = -suggested_ang_vel/2
+
+            else:
+                longitudinal_velocity = suggested_long_vel/3
+                angular_velocity = 0
 
         else:
             pass # do nothing -> wait for more sample (it only affects the first half second)
