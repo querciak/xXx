@@ -1,5 +1,6 @@
 import Sensing
 import Actions
+import sys
 
 left_top = 128
 left_bottom = 2
@@ -11,6 +12,7 @@ class EmergencySolution():
         self.previous_state = ''
         self.leave_emergency_state_counter = 0
         self.leave_emergency_state_threshold = 100
+        self.automotive_switch = True
 
 
     def check_for_emergency_solution(self,current_state):
@@ -50,13 +52,17 @@ class EmergencySolution():
                 # turn left
                 Actions.get_actions().straight_speed = 0
                 Actions.get_actions().steering_speed = Actions.get_actions().suggested_left_turn_speed
+            elif sum_buttons == right_bottom+right_top+left_bottom+left_top:
+                self.automotive_switch = not self.automotive_switch
+
         elif current_state == 'emergency_state':
             Actions.get_actions().straight_speed = 0
             Actions.get_actions().steering_speed = 0
-            self.leave_emergency_state_counter += 1
-            if self.leave_emergency_state_counter > self.leave_emergency_state_threshold:
-                ret_val = False
-                CURRENT_STATE = self.previous_state # back to state before corrigation
+            if self.automotive_switch == True:
+                self.leave_emergency_state_counter += 1
+                if self.leave_emergency_state_counter > self.leave_emergency_state_threshold:
+                    ret_val = False
+                    CURRENT_STATE = self.previous_state # back to state before corrigation
         else:
             ret_val = False
             CURRENT_STATE = current_state

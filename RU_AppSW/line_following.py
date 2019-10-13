@@ -14,13 +14,13 @@ angular_velocity = 90 # 45 deg/s
 velocity = -800
 
 # store reflection-time function
-maxlen_of_reflection = 60       # storage for half a second
+maxlen_of_reflection = 30       # storage for half a second
 full_white_reflection = 46      # above this value it is considered full white
 nominal_reflection = 30         # value corresponding to optimal tracking
 threshold_nom_reflection = 6    # threshold in which nominal is accepted
-amount_of_change = 10           # amount which shall be changed in the time range below
-quick_rate_of_change = 10
-slow_rate_of_change = 40
+amount_of_change = 7            # amount which shall be changed in the time range below
+quick_rate_of_change = 5
+slow_rate_of_change = 20
 dark_color_threshold = 15
 filter_gain = 30
 
@@ -121,20 +121,23 @@ class line_following():
 
 
             # around the nominal value
-            elif int(average_of_last_points) in range(nominal_reflection-threshold_nom_reflection,nominal_reflection+threshold_nom_reflection):
-                # track changes slowly
-                if slow_rate_analysis == 1:
-                    # adjust a little by going right
-                    longitudinal_velocity = suggested_long_vel/6
-                    angular_velocity = -suggested_ang_vel/3
-                elif slow_rate_analysis == -1:
-                    # adjust a little by going left
-                    longitudinal_velocity = suggested_long_vel/6
-                    angular_velocity = suggested_ang_vel/3
-                else:
-                    longitudinal_velocity = suggested_long_vel/4
-                    angular_velocity = 0
+            #elif int(average_of_last_points) in range(nominal_reflection-threshold_nom_reflection,nominal_reflection+threshold_nom_reflection):
+            # track changes slowly
+            if slow_rate_analysis == 1:
+                # adjust a little by going right
+                longitudinal_velocity = suggested_long_vel/5
+                angular_velocity = -suggested_ang_vel/2
+            elif slow_rate_analysis == -1:
+                # adjust a little by going left
+                longitudinal_velocity = suggested_long_vel/5
+                angular_velocity = suggested_ang_vel/2
+            #else:
+            #    longitudinal_velocity = suggested_long_vel/4
+            #    angular_velocity = 0
             elif quick_change_analysis == 1: # we just arrived to the path or nominal increased
+                longitudinal_velocity = suggested_long_vel/3
+                angular_velocity = 0
+            elif quick_rate_of_change == -1: # we just left the path
                 # we might need to turn left or right
                 if filter_gain < len([sample > full_white_reflection for sample in self.reflection_time]):
                     # we have to turn right
