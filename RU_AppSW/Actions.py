@@ -9,12 +9,21 @@ class Actions:
         self.straight_speed = 0
         self.steering_speed = 0
         self.arm_speed = 0
+<<<<<<< HEAD
+        self.suggested_longitudinal_speed = -120 # going forward
+        self.suggested_left_turn_speed = 90
+        #self._left_motor = Motor(Port.D)
+        #self._right_motor = Motor(Port.A)
+        #self._arm_motor = Motor(Port.C)
+        #self._wheels = DriveBase(self._left_motor, self._right_motor, wheel_diameter=56, axle_track=114)
+=======
         self.suggested_longitudinal_speed = -360 # going forward
         self.suggested_left_turn_speed = 150
         self._left_motor = Motor(Port.D)
         self._right_motor = Motor(Port.A)
         self._arm_motor = Motor(Port.C)
         self._wheels = DriveBase(self._left_motor, self._right_motor, wheel_diameter=56, axle_track=114)
+>>>>>>> f7fe0d8723e5bfcff277506316c1187c083b12a7
 
     def turn(self, angle=0):
         self._wheels.drive_time(0, 45, 1000)
