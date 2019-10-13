@@ -10,7 +10,7 @@ class EmergencySolution():
     def __init__(self):
         self.previous_state = ''
         self.leave_emergency_state_counter = 0
-        self.leave_emergency_state_threshold = 25
+        self.leave_emergency_state_threshold = 100
 
 
     def check_for_emergency_solution(self,current_state):
