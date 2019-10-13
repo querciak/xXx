@@ -7,7 +7,12 @@ import AppControl.sm_challenge2 as sm_challenge2
 
 #import Actions
 import Sensing
+<<<<<<< HEAD
 #import Music
+=======
+import Music
+import line_following
+>>>>>>> f7fe0d8723e5bfcff277506316c1187c083b12a7
 
 timestep_size = 10
 
@@ -29,9 +34,11 @@ while True:
     begin = watch.time() # total elapsed time in ms
 
     # actions inside here
-    # play next note if needed
     # TODO uncomment following line for the competition
     # Music.get_music().play_music()
+
+    # update reflection_time function for line_following
+    line_following.get_line_follower().update_reflection()
         
     #appcontrol.appcontrol_main()
     #sm_challenge1.sm_challenge1_main()
