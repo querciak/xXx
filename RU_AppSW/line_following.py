@@ -68,16 +68,15 @@ class line_following():
         longitudinal_velocity = Actions.get_actions().straight_speed
         angular_velocity = Actions.get_actions().steering_speed
 
-        half_length = int(maxlen_of_reflection/2)
-        average_of_first_points = 0
-        average_of_last_points = 0
-        for i in range(0,half_length):
-            average_of_first_points += self.reflection_time[i]
-            average_of_last_points += self.reflection_time[half_length+i]
-        average_of_first_points = int(average_of_first_points/half_length)
-        average_of_last_points = int(average_of_last_points/half_length)
-
         if len(self.reflection_time) == maxlen_of_reflection:
+            half_length = int(maxlen_of_reflection/2)
+            average_of_first_points = 0
+            average_of_last_points = 0
+            for i in range(0,half_length):
+                average_of_first_points += self.reflection_time[i]
+                average_of_last_points += self.reflection_time[half_length+i]
+            average_of_first_points = int(average_of_first_points/half_length)
+            average_of_last_points = int(average_of_last_points/half_length)
             # do the calculations here
             slow_rate_analysis = self.determine_change_rate_signed(slow_rate_of_change)
             # 1  -> adjustment to right

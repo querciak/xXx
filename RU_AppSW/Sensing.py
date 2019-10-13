@@ -37,7 +37,7 @@ class Sensing():
         self.color_samples = 5
         self.touch_sensor = TouchSensor(Port.S1)
         self.color_sensor = ColorSensor(Port.S2)
-        self.infrared_sensor = InfraredSensor(Port.S4)
+        self.infrared_sensor = InfraredSensor(Port.S3)
         #self.__col_queue = deque(maxlen=self.color_samples)
 
     @staticmethod
