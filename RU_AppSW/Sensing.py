@@ -64,7 +64,7 @@ class Sensing():
         return self.color_sensor.reflection()
 
     def get_button(self):
-        return self.infrared_sensor.buttons(1)
+        return [self.infrared_sensor.buttons(1),self.infrared_sensor.buttons(2),self.infrared_sensor.buttons(3),self.infrared_sensor.buttons(4)]
 
     def get_distance(self):
         return self.infrared_sensor.distance()

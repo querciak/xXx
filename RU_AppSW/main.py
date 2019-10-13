@@ -26,7 +26,7 @@ while True:
 
     # actions inside here
     # TODO uncomment following line for the competition
-    # Music.get_music().play_music()
+    Music.get_music().play_music()
 
     # update reflection_time function for line_following
     line_following.get_line_follower().update_reflection()
@@ -38,6 +38,7 @@ while True:
     # actuate
 
     Actions.get_actions().actuate()
+    Actions.get_actions().move_arm()
 
     # end of actions
     elapsed = watch.time() - begin

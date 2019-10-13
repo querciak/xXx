@@ -126,11 +126,11 @@ class line_following():
             if slow_rate_analysis == 1:
                 # adjust a little by going right
                 longitudinal_velocity = suggested_long_vel/5
-                angular_velocity = -suggested_ang_vel/2
+                angular_velocity = -int(suggested_ang_vel/2.3)
             elif slow_rate_analysis == -1:
                 # adjust a little by going left
                 longitudinal_velocity = suggested_long_vel/5
-                angular_velocity = suggested_ang_vel/2
+                angular_velocity = int(suggested_ang_vel/2.3)
             #else:
             #    longitudinal_velocity = suggested_long_vel/4
             #    angular_velocity = 0

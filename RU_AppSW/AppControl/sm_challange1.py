@@ -43,8 +43,8 @@ def isTimerPassed(counter, threshold):
 
 def stripe_reached():
     # take value from color sensor
-    current_color = Sensing.get_sensing().get_reflection()
-    if current_color > 47:
+    current_color = Sensing.get_sensing().get_color()
+    if current_color == Color.WHITE:
         return True
     else:
         return False
@@ -80,12 +80,7 @@ def sm_challenge1_main():
     global searching_line_turn_threshold
     global adaptline_maneuver_counter
     global previous_state
-    global counter_to_print
-
-    counter_to_print += 1
-    if counter_to_print >= print_at:
-        counter_to_print = 0
-        print(CURRENT_STATE)
+    
 
     if CURRENT_STATE == STATES[0]: # init
         #check valid transition
